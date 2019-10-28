@@ -29,11 +29,17 @@ class ImageCell extends StatelessWidget {
         return _buildImage(cacheSize: 10);
       case ImageDisplayType.just:
         return LayoutBuilder(
-          builder: (context, constraints) => _buildImage(
-            cacheSize:
+          builder: (context, constraints) {
+            final cacheSize =
                 (constraints.maxWidth * MediaQuery.of(context).devicePixelRatio)
-                    .toInt(),
-          ),
+                    .toInt();
+            return Image.asset(
+              _imageName,
+              fit: BoxFit.cover,
+              cacheWidth: cacheSize,
+              cacheHeight: cacheSize,
+            );
+          },
         );
     }
     assert(false, 'Unexpecgted type: $type');
